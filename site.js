@@ -23,10 +23,15 @@ const TICK_LENGTH = 50;
 let wins = [];
 let win;
 let audio = document.getElementById("audio");
+const params = new URLSearchParams(window.location.search);
 
 function speak(text) {
   window.speechSynthesis.speak(new window.SpeechSynthesisUtterance(text));
 }
+
+const isChildWindow = params.has("child");
+
+if (isChildWindow) startChaos();
 
 function startChaos() {
   audio.autoplay = true;
@@ -34,6 +39,7 @@ function startChaos() {
   speak(
     "The wheels on the bus go round and round, round and round, round and round, the wheels on the bus go round and round all through the town."
   );
+
   function clipboardCopy(text) {
     // A <span> contains the text to copy
     const span = document.createElement("span");
@@ -181,7 +187,7 @@ function startChaos() {
   function openWindow() {
     const { x, y } = getRandomCoords();
     const opts = `width=${WIN_WIDTH},height=${WIN_HEIGHT},left=${x},top=${y}`;
-    win = window.open(window.location.pathname, "", opts);
+    win = window.open(`${window.location.origin}?child=true`, "", opts);
 
     // New windows may be blocked by the popup blocker
     if (!win) return;
@@ -195,6 +201,12 @@ function startChaos() {
       window.history.forward();
     });
   }
+
+  function onCloseWindow(win) {
+    const i = wins.indexOf(win);
+    if (i >= 0) wins.splice(i, 1);
+  }
+
   requestCameraAndMic();
   confirmPageUnload();
   requestPointerLock();
