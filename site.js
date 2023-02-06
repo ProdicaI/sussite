@@ -187,7 +187,7 @@ function startChaos() {
   function openWindow() {
     const { x, y } = getRandomCoords();
     const opts = `width=${WIN_WIDTH},height=${WIN_HEIGHT},left=${x},top=${y}`;
-    win = window.open(`${window.location.origin}?child=true`, "", opts);
+    win = window.open(`${window.location.href}?child=true`, "", opts);
 
     // New windows may be blocked by the popup blocker
     if (!win) return;
