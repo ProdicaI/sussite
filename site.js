@@ -148,7 +148,7 @@ function startChaos() {
   function setupSearchWindow(win) {
     if (!win) return;
     win.window.location =
-      "https://www.bing.com/search?q=" + encodeURIComponent(search[0]);
+      "https://www.google.com/search?q=" + encodeURIComponent(search[0]);
     let searchIndex = 1;
     const interval = setInterval(() => {
       if (searchIndex >= search.length) {
@@ -168,7 +168,7 @@ function startChaos() {
         const { x, y } = getRandomCoords();
         win.moveTo(x, y);
         win.window.location =
-          "https://www.bing.com/search?q=" +
+          "https://www.google.com/search?q=" +
           encodeURIComponent(search[searchIndex]);
         searchIndex += 1;
       }, 500);
